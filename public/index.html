@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>PI Control</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial,sans-serif;
+    }
+    header {
+      margin: 1em;
+    }
+    .pin-wrapper {
+      display: flex;
+      flex-wrap: wrap;
+      width: 60px;
+      justify-content: center;
+      margin-left: 210px;
+    }
+    .pin-wrapper > input[type=checkbox] {
+      width: 20px;
+      height: 20px;
+      cursor: pointer;
+    }
+    .pin-wrapper > input[type=checkbox]:checked {
+      opacity: 100%;
+    }
+    .pin-wrapper > input[type=checkbox]:disabled {
+      opacity: 0;
+      cursor: not-allowed;
+    }
+    .body {
+      display: flex;
+      background: url('/rpi.png') no-repeat;
+      background-size: 310px;
+      background-position-y: -85px;
+      background-position-x: -40px;
+      margin-left: 1em;
+    }
+  </style>
+</head>
+<body>
+<div>
+  <header><h2>God is Dead</h2></header>
+  <div class="body">
+    <div class="pin-wrapper">
+      <input class="pin" type="checkbox" id="pin-1" value="1">
+      <input class="pin" type="checkbox" id="pin-2" value="2">
+      <input class="pin" type="checkbox" id="pin-3" value="3">
+      <input class="pin" type="checkbox" id="pin-4" value="4">
+      <input class="pin" type="checkbox" id="pin-5" value="5">
+      <input class="pin" type="checkbox" id="pin-6" value="6" disabled>
+      <input class="pin" type="checkbox" id="pin-7" value="7">
+      <input class="pin" type="checkbox" id="pin-8" value="8">
+      <input class="pin" type="checkbox" id="pin-9" value="9" disabled>
+      <input class="pin" type="checkbox" id="pin-10" value="10">
+      <input class="pin" type="checkbox" id="pin-11" value="11">
+      <input class="pin" type="checkbox" id="pin-12" value="12">
+      <input class="pin" type="checkbox" id="pin-13" value="13">
+      <input class="pin" type="checkbox" id="pin-14" value="14" disabled>
+      <input class="pin" type="checkbox" id="pin-15" value="15">
+      <input class="pin" type="checkbox" id="pin-16" value="16">
+      <input class="pin" type="checkbox" id="pin-17" value="17">
+      <input class="pin" type="checkbox" id="pin-18" value="18">
+      <input class="pin" type="checkbox" id="pin-19" value="19">
+      <input class="pin" type="checkbox" id="pin-20" value="20" disabled>
+      <input class="pin" type="checkbox" id="pin-21" value="21">
+      <input class="pin" type="checkbox" id="pin-22" value="22">
+      <input class="pin" type="checkbox" id="pin-23" value="23">
+      <input class="pin" type="checkbox" id="pin-24" value="24">
+      <input class="pin" type="checkbox" id="pin-25" value="25" disabled>
+      <input class="pin" type="checkbox" id="pin-26" value="26">
+      <input class="pin" type="checkbox" id="pin-27" value="27">
+      <input class="pin" type="checkbox" id="pin-28" value="28">
+      <input class="pin" type="checkbox" id="pin-29" value="29">
+      <input class="pin" type="checkbox" id="pin-30" value="30" disabled>
+      <input class="pin" type="checkbox" id="pin-31" value="31">
+      <input class="pin" type="checkbox" id="pin-32" value="32">
+      <input class="pin" type="checkbox" id="pin-33" value="33">
+      <input class="pin" type="checkbox" id="pin-34" value="34" disabled>
+      <input class="pin" type="checkbox" id="pin-35" value="35">
+      <input class="pin" type="checkbox" id="pin-36" value="36">
+      <input class="pin" type="checkbox" id="pin-37" value="37">
+      <input class="pin" type="checkbox" id="pin-38" value="38">
+      <input class="pin" type="checkbox" id="pin-39" value="39" disabled>
+      <input class="pin" type="checkbox" id="pin-40" value="40">
+    </div>
+  </div>
+</div>
+<script>
+  const pins = document.getElementsByClassName('pin');
+  for (let pin of pins) {
+    pin.addEventListener("click", function(e) {
+      const el = e.currentTarget;
+      console.log(`Pin ${el.value} is ${el.checked ? 'on' : 'off'}.`)
+      const method = el.checked ? 'POST': 'DELETE';
+      fetch(`/v1/setpin/${el.value}`, { method: method })
+    });
+  }
+</script>
+</body>
+</html>
