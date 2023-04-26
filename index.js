@@ -10,31 +10,29 @@ app.use(express.static('public', {
 app.post('/v1/setpin/:value', (req, res) => {
     const num = Number(req.params.value);
     console.log(`Pin ${num} is on`);
-    gpio.setup(num, gpio.DIR_OUT).then(() => {
-        gpio.write(num, false).then((err) => {
-            if (err) throw err;
-            console.log('Written to pin');
-            return res.sendStatus(200);
-        });
-    }).catch((err) => {
-        console.log('Error: ', err.toString())
-        return res.sendStatus(504);
-    })
+    gpio.setup(num, gpio.DIR_OUT)
+        .then(() => {
+            gpio.write(num, true).then(() => {
+                return res.sendStatus(200);
+            })
+        })
+        .catch((err) => {
+            console.log('Error: ', err.toString())
+        })
 });
 
 app.delete('/v1/setpin/:value', (req, res) => {
     const num = Number(req.params.value);
     console.log(`Pin ${num} is off`);
-    gpio.setup(num, gpio.DIR_OUT).then(() => {
-        gpio.write(num, false).then((err) => {
-            if (err) throw err;
-            console.log('Written to pin');
-            return res.sendStatus(200);
-        });
-    }).catch((err) => {
-        console.log('Error: ', err.toString())
-        return res.sendStatus(504);
-    })
+    gpio.setup(num, gpio.DIR_OUT)
+        .then(() => {
+            gpio.write(num, false).then(() => {
+                return res.sendStatus(200);
+            })
+        })
+        .catch((err) => {
+            console.log('Error: ', err.toString())
+        })
 });
 
 app.listen(port, () => {
