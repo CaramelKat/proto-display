@@ -10,9 +10,9 @@ app.use(express.static('public', {
 app.post('/v1/setpin/:value', (req, res) => {
     const num = Number(req.params.value);
     console.log(`Pin ${num} is on`);
-    gpiop.setup(7, gpiop.DIR_OUT)
+    gpiop.setup(num, gpiop.DIR_OUT)
         .then(() => {
-            gpiop.write(7, true);
+            gpiop.write(num, true);
             return res.sendStatus(200);
         })
         .catch((err) => {
@@ -24,9 +24,9 @@ app.post('/v1/setpin/:value', (req, res) => {
 app.delete('/v1/setpin/:value', (req, res) => {
     const num = Number(req.params.value);
     console.log(`Pin ${num} is off`);
-    gpiop.setup(7, gpiop.DIR_OUT)
+    gpiop.setup(num, gpiop.DIR_OUT)
         .then(() => {
-            gpiop.write(7, false);
+            gpiop.write(num, false);
             return res.sendStatus(200);
         })
         .catch((err) => {
