@@ -11,7 +11,7 @@ app.post('/v1/setpin/:value', (req, res) => {
     const num = Number(req.params.value);
     console.log(`Pin ${num} is on`);
     gpio.setup(num, gpio.DIR_OUT).then(() => {
-        gpio.write(num, true, function(err) {
+        gpio.write(num, false).then((err) => {
             if (err) throw err;
             console.log('Written to pin');
             return res.sendStatus(200);
@@ -26,7 +26,7 @@ app.delete('/v1/setpin/:value', (req, res) => {
     const num = Number(req.params.value);
     console.log(`Pin ${num} is off`);
     gpio.setup(num, gpio.DIR_OUT).then(() => {
-        gpio.write(num, false, function(err) {
+        gpio.write(num, false).then((err) => {
             if (err) throw err;
             console.log('Written to pin');
             return res.sendStatus(200);
