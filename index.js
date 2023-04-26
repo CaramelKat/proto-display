@@ -12,10 +12,12 @@ app.post('/v1/setpin/:value', (req, res) => {
     console.log(`Pin ${num} is on`);
     gpiop.setup(7, gpiop.DIR_OUT)
         .then(() => {
-            return gpiop.write(7, true)
+            gpiop.write(7, true);
+            return res.sendStatus(200);
         })
         .catch((err) => {
             console.log('Error: ', err.toString())
+            return res.sendStatus(504);
         })
 });
 
@@ -24,10 +26,12 @@ app.delete('/v1/setpin/:value', (req, res) => {
     console.log(`Pin ${num} is off`);
     gpiop.setup(7, gpiop.DIR_OUT)
         .then(() => {
-            return gpiop.write(7, false)
+            gpiop.write(7, false);
+            return res.sendStatus(200);
         })
         .catch((err) => {
             console.log('Error: ', err.toString())
+            return res.sendStatus(504);
         })
 });
 
